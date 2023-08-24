@@ -4,8 +4,8 @@ services:
     image: postgres:13
     environment:
       POSTGRES_DB: notification_db
-      POSTGRES_USER: username
-      POSTGRES_PASSWORD: password
+      POSTGRES_USER: gila
+      POSTGRES_PASSWORD: gila
     ports:
       - "5432:5432"
 
