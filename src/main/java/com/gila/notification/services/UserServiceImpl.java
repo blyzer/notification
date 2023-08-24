@@ -2,6 +2,7 @@ package com.gila.notification.services;
 
 import com.gila.notification.dtos.UserDTO;
 import com.gila.notification.entities.User;
+import com.gila.notification.exceptions.UserCreationException;
 import com.gila.notification.exceptions.UserNotFoundException;
 import com.gila.notification.repositories.UserRepository;
 import lombok.Data;
@@ -27,8 +28,14 @@ public class UserServiceImpl implements IUserService {
     @Override
     public UserDTO createUser(UserDTO userDTO) {
         User user = modelMapper.map(userDTO, User.class);
-        userRepository.save(user);
-        return modelMapper.map(user, userDTO.getClass());
+        try
+        {
+            userRepository.save(user);
+            return modelMapper.map(user, userDTO.getClass());
+        }
+        catch (UserCreationException ex) {
+            throw new UserCreationException("An error occurred while creating the user.");
+        }
     }
 
     @Override
