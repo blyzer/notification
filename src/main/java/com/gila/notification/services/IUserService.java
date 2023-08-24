@@ -1,6 +1,6 @@
-package com.gila.notification.service;
+package com.gila.notification.services;
 
-import com.gila.notification.dto.UserDTO;
+import com.gila.notification.dtos.UserDTO;
 
 import java.util.List;
 

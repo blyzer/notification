@@ -1,4 +1,4 @@
-package com.gila.notification.entity;
+package com.gila.notification.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Data
@@ -18,7 +20,9 @@ public class Notification {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String category;
+    private MessageCategory category;
     private String message;
-    private String messageType;
+    private NotificationType type;
+    private List<User> subscribers;
+    private LocalDateTime sentTime;
 }

@@ -1,6 +1,6 @@
-package com.gila.notification.controller;
+package com.gila.notification.controllers;
 
-import com.gila.notification.service.NotificationService;
+import com.gila.notification.services.NotificationServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/notifications")
 public class NotificationController {
-    private final NotificationService notificationService;
+    private final NotificationServiceImpl notificationService;
 
     @Autowired
-    public NotificationController(NotificationService notificationService) {
+    public NotificationController(NotificationServiceImpl notificationService) {
         this.notificationService = notificationService;
     }
 

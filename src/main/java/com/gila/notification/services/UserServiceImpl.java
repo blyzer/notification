@@ -1,8 +1,8 @@
-package com.gila.notification.service;
+package com.gila.notification.services;
 
-import com.gila.notification.dto.UserDTO;
-import com.gila.notification.entity.User;
-import com.gila.notification.repository.UserRepository;
+import com.gila.notification.dtos.UserDTO;
+import com.gila.notification.entities.User;
+import com.gila.notification.repositories.UserRepository;
 import lombok.Data;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -15,8 +15,8 @@ import java.util.Optional;
 @Data
 public class UserServiceImpl implements IUserService {
 
-    private UserRepository userRepository;
-    private ModelMapper modelMapper = new ModelMapper();
+    private final UserRepository userRepository;
+    private ModelMapper modelMapper;
 
     public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper) {
         this.userRepository = userRepository;

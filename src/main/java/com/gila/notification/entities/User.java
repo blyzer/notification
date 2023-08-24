@@ -1,4 +1,4 @@
-package com.gila.notification.entity;
+package com.gila.notification.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,9 +21,9 @@ public class User {
     private String phoneNumber;
 
     @ElementCollection
-    private List<String> subscribedCategories;
+    private List<MessageCategory> subscribedCategories;
 
     @ElementCollection
-    private List<String> notificationChannels;
+    private List<NotificationType> notificationChannels;
 }
 

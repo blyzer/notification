@@ -1,7 +1,7 @@
-package com.gila.notification.dto;
+package com.gila.notification.dtos;
 
-import com.gila.notification.entity.MessageCategory;
-import com.gila.notification.entity.NotificationType;
+import com.gila.notification.entities.MessageCategory;
+import com.gila.notification.entities.NotificationType;
 import lombok.Data;
 import java.time.LocalDateTime;
 

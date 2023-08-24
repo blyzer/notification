@@ -1,6 +1,6 @@
-package com.gila.notification.service;
+package com.gila.notification.services;
 
-import com.gila.notification.entity.Notification;
+import com.gila.notification.dtos.NotificationDTO;
 
 import java.util.List;
 
@@ -9,10 +9,10 @@ public interface INotificationService {
      * @param notification Notification to send.
      * @return Notification sent.
      */
-    Notification sendNotification(Notification notification);
+    NotificationDTO sendNotification(NotificationDTO notification);
 
     /**
      * @return Get All Notification.
      */
-    List<Notification> getAllNotifications();
+    List<NotificationDTO> getAllNotifications();
 }
