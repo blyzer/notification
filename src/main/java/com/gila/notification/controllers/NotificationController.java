@@ -1,12 +1,16 @@
 package com.gila.notification.controllers;
 
+import com.gila.notification.dtos.NotificationDTO;
 import com.gila.notification.services.NotificationServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
-@RequestMapping("/notifications")
+@RequestMapping("/api/notifications")
 public class NotificationController {
     private final NotificationServiceImpl notificationService;
 
@@ -15,5 +19,15 @@ public class NotificationController {
         this.notificationService = notificationService;
     }
 
-    // Define endpoints for CRUD operations
+    @PostMapping("/send")
+    public ResponseEntity<NotificationDTO> sendNotification(@RequestBody NotificationDTO notificationDTO) {
+        NotificationDTO sentNotification = notificationService.sendNotification(notificationDTO);
+        return new ResponseEntity<>(sentNotification, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<NotificationDTO>> getAllNotifications() {
+        List<NotificationDTO> allNotifications = notificationService.getAllNotifications();
+        return new ResponseEntity<>(allNotifications, HttpStatus.OK);
+    }
 }

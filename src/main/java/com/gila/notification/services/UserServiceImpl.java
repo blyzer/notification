@@ -2,6 +2,7 @@ package com.gila.notification.services;
 
 import com.gila.notification.dtos.UserDTO;
 import com.gila.notification.entities.User;
+import com.gila.notification.exceptions.UserNotFoundException;
 import com.gila.notification.repositories.UserRepository;
 import lombok.Data;
 import org.modelmapper.ModelMapper;
@@ -28,6 +29,23 @@ public class UserServiceImpl implements IUserService {
         User user = modelMapper.map(userDTO, User.class);
         userRepository.save(user);
         return modelMapper.map(user, userDTO.getClass());
+    }
+
+    @Override
+    public UserDTO updateUser(long id, UserDTO userDTO) {
+        Optional<User> existingUserOptional = userRepository.findById(id);
+        if (existingUserOptional.isPresent()){
+            User existingUser = existingUserOptional.get();
+            existingUser.setName(userDTO.getName());
+            existingUser.setEmail(userDTO.getEmail());
+            existingUser.setPhoneNumber(userDTO.getPhoneNumber());
+            existingUser.setSubscribedCategories(userDTO.getSubscribedCategories());
+            existingUser.setNotificationChannels(userDTO.getNotificationChannels());
+            User updatedUser = userRepository.save(existingUser);
+            return modelMapper.map(updatedUser, UserDTO.class);
+        } else {
+            throw new UserNotFoundException("User with ID " + id + " not found");
+        }
     }
 
     @Override

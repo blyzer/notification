@@ -13,11 +13,21 @@ public interface IUserService {
      */
     UserDTO createUser(UserDTO user);
 
+
+    /**
+     * Update a new user.
+     *
+     * @param id The id of user
+     * @param user The user data.
+     * @return The created user.
+     */
+    UserDTO updateUser(long id, UserDTO user);
+
     /**
      * Get a User by id.
      *
      * @param id The user id.
-     * @return
+     * @return UserDTO
      */
     UserDTO getUserById(Long id);
 
