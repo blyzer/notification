@@ -34,8 +34,10 @@ public class NotificationServiceImpl implements INotificationService {
     @Override
     public NotificationDTO sendNotification(NotificationDTO notificationDTO) {
         notificationDTO.getSubscribers().forEach(user ->
-                user.getNotificationChannels().forEach(channel ->
-                        sendNotificationToChannel(notificationDTO, user, channel)
+                user.getSubscribedCategories().forEach( category ->
+                    user.getNotificationChannels().forEach(channel ->
+                            sendNotificationToChannel(notificationDTO, user, channel)
+                    )
                 )
         );
 
@@ -44,13 +46,13 @@ public class NotificationServiceImpl implements INotificationService {
     }
 
 
-    private void sendNotificationToChannel(NotificationDTO notificationDTO, UserDTO user, NotificationType notificationType) {
+    private void sendNotificationToChannel(NotificationDTO notificationDTO, UserDTO user, NotificationType channel) {
         MessageCategory category = notificationDTO.getCategory();
         String message = notificationDTO.getMessage();
 
         NotificationDTO mappedNotification = notificationChannelFactory
-                .getNotificationChannel(notificationType)
-                .sendNotification(category, message, notificationType, user);
+                .getNotificationChannel(channel) // Pass the correct channel
+                .sendNotification(category, message, channel, user);
 
         Notification notification = modelMapper.map(mappedNotification, Notification.class);
         notification.setSentTime(LocalDateTime.now());
